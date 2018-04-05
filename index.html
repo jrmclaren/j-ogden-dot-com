@@ -19,17 +19,17 @@
             <!--social bottom half-->
             <div class="page-content__bottom">
                 <div class="page-content__bottom__inner">
-                    <a class="social-links" href="">
+                    <a class="social-links" href="https://soundcloud.com/jamesogdenmusic/" target="_blank">
                         <svg>
                             <use xlink:href="img/social.svg#icon-soundcloud"></use>
                         </svg>
                     </a>
-                    <a class="social-links" href="">
+                    <a class="social-links" href="https://www.facebook.com/jamesogdenmusic/" target="_blank">
                         <svg>
                             <use xlink:href="img/social.svg#icon-facebook"></use>
                         </svg>
                     </a>
-                    <a class="social-links" href="">
+                    <a class="social-links" href="https://www.instagram.com/jamesogdenmusic/" target="_blank">
                         <svg>
                             <use xlink:href="img/social.svg#icon-instagram"></use>
                         </svg>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="page-content__bottom" >
                     <div class="page-content__bottom__inner">
-                        <form id="contact" class="contact-form" action="#">
+                        <form id="contact" class="contact-form" onsubmit="e=>(e.preventDefault())">
                             <div class="contact-form__text-input-container">
                                 <input class="contact-form__text-input"
                                        id="name"
@@ -92,30 +92,41 @@
             </div>
             </div>
             <div class="page-content__back">
-                <div class="page-content__top" style="text-align: center; padding: 5rem">
-                    <h1>Thanks</h1>
-                    <aside>
-                        I'll be in touch
-                    </aside>
-                    <small>P.S. This is a prototype, no one will be in touch.</small>
+                <div class="page-content__top">
+                    <div class="page-content__top-inner">
+                        <h2 class="thanks-page__heading">Thanks</h2>
+                        <aside class="thanks-page__subheading">
+                            I'll be in touch
+                        </aside>
+                        <small class="thanks-page__small-text">P.S. This is a prototype, no one will be in touch.</small>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 </div>
+<footer class="page-footer">
+    <small>
+        Made with <5 for James Ogden by Jason McLaren. &copy; 2018. But not really, cause this is a prototype.
+    </small>
+</footer>
 </body>
 <script>
     // disable scrolling for 5 seconds for start animation
+    scroll(0,0);
     document.addEventListener('DOMContentLoaded', () => {
         let html = document.getElementsByTagName('html')[0];
+
         html.style.overflowY = 'hidden';
-        setTimeout(5000, { () => {
-            html.style.overflowY = 'initial';
-        }})
+        let enableScolling = () => {
+        html.style.overflowY = 'initial';
+        };
+        setTimeout(enableScolling, 3500);
     });
     // form submit dummy
     let form = document.forms[0];
     form.addEventListener('submit', (e) => {
+        e.stopImmediatePropagation();
         e.preventDefault();
         // front of form card
        let front = document.getElementsByClassName('page-content__front')[0];

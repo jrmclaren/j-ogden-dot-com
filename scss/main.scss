@@ -179,7 +179,7 @@ body{
 .page-content{
   position: relative;
   margin: 0 auto;
-
+  perspective: 2000px;
   &__top {
     position: absolute;
     width: 50vw;
@@ -188,6 +188,10 @@ body{
     left: 0;
     @include respond('phone-large'){
       width: 75vw;
+    }
+
+    &-inner{
+      padding: 15rem;
     }
   }
 
@@ -250,18 +254,18 @@ body{
   &__front{
     transition: all 1s ease-out;
     backface-visibility: hidden;
-    transform: rotateY(0deg);
+    transform: translateY(0rem) rotateY(0deg);
     /* transform: rotateY(180deg); */
     &--sent{
-      transform: rotateY(180deg);
+      transform: translateY(-.3rem) rotateY(180deg);
     }
   }
   &__back{
     transition: all 1s ease-out;
     backface-visibility: hidden;
-    transform: rotateY(-180deg);
+    transform: translateY(-.3rem) rotateY(-180deg);
     &--sent{
-      transform: rotateY(0deg);
+      transform: translateY(0rem) rotateY(0deg);
     }
   }
   &__cta{
@@ -375,5 +379,35 @@ body{
       transform: translateY(-.1rem);
       box-shadow: 0rem .2rem 0rem 0rem rgba($ctaColor,1);
     }
+  }
+}
+.thanks-page{
+
+  & * {
+    &:not(:last-child){
+      margin-bottom: 5rem;
+    }
+  }
+
+  &__heading{
+    font-size: 3.6rem;
+    font-weight: 600;
+  }
+  &__subheading{
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: darkgrey;
+  }
+  &__small-text{
+    font-size: 1rem;
+  }
+}
+
+.page-footer{
+  background-color: #fcfcfc;
+  padding: 2.5rem;
+  small{
+    font-size: .9rem;
+
   }
 }
