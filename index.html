@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>James Ogden</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -104,6 +105,14 @@
 </div>
 </body>
 <script>
+    // disable scrolling for 5 seconds for start animation
+    document.addEventListener('DOMContentLoaded', () => {
+        let html = document.getElementsByTagName('html')[0];
+        html.style.overflowY = 'hidden';
+        setTimeout(5000, { () => {
+            html.style.overflowY = 'initial';
+        }})
+    });
     // form submit dummy
     let form = document.forms[0];
     form.addEventListener('submit', (e) => {

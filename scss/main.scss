@@ -2,17 +2,17 @@ $ctaColor: #0E9577;
 
 @mixin respond($size){
   @if $size == 'phone-large'{
-    @media only screen and (max-width: 42.5em) {
+    @media only screen and (max-width: 26.56em) { //26.5625
       @content
     }
   }
   @if $size == 'phone-medium'{
-    @media only screen and (max-width: 37.5em) {
+    @media only screen and (max-width: 23.43em) { //23.4375
       @content
     }
   }
   @if $size == 'phone-small'{
-    @media only screen and (max-width: 32.0em) {
+    @media only screen and (max-width: 20em) {
       @content
     }
   }
@@ -58,9 +58,8 @@ body{
   height: 100vh;
   position: absolute;
   background-color: white;
-  $startDelay: /* 1.5s */ 0s;
-  $animationDuration: /* 5s */ 0s;
-
+  $startDelay:  .6s;
+  $animationDuration: 1.6s;
   &--left{
     background-color: white;
     animation: slidePageHalfUp $animationDuration ease-in-out $startDelay;
@@ -75,11 +74,12 @@ body{
     &--image{
       z-index: 50;
       @include respond('phone-large'){
+        animation: fromLeft $animationDuration ease-out $startDelay;
+        animation-fill-mode: backwards;
         width: 25vw;
         & .full-bleed-image{
           background-position: 60% 50%;
         }
-
       }
     }
   }
@@ -97,6 +97,9 @@ body{
     }
     &--image{
       @include respond('phone-large'){
+        animation: fromRight $animationDuration ease-out $startDelay;
+        transform-origin: bottom right;
+        animation-fill-mode: backwards;
         width: 25vw;
       }
     }
@@ -136,6 +139,41 @@ body{
   }
   25%, 100%{
     opacity: 1;
+  }
+}
+
+@keyframes fromRight {
+  0%{
+    opacity: 0;
+    //width: 100vw;
+    transform: translateX(100vw);
+  }
+  25%{
+    opacity: 1;
+    transform: translateX(100vw);
+  }
+  50%{
+    transform: translateX(100vw);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+@keyframes fromLeft {
+  0%{
+    opacity: 0;
+    //width: 100vw;
+    transform: translateX(-100vw);
+  }
+  25%{
+    opacity: 1;
+    transform: translateX(-100vw);
+  }
+  50%{
+    transform: translateX(-100vw);
+  }
+  100%{
+    transform: translateX(0);
   }
 }
 .page-content{
@@ -237,7 +275,7 @@ body{
         left: 2.5rem;
       }
       @include respond('phone-small'){
-        left: 0rem;
+        left: 1rem;
       }
       &:link, &:visited{
         text-decoration: none;
