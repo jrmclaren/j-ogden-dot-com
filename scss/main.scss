@@ -1,0 +1,341 @@
+$ctaColor: #0E9577;
+
+@mixin respond($size){
+  @if $size == 'phone-large'{
+    @media only screen and (max-width: 42.5em) {
+      @content
+    }
+  }
+  @if $size == 'phone-medium'{
+    @media only screen and (max-width: 37.5em) {
+      @content
+    }
+  }
+  @if $size == 'phone-small'{
+    @media only screen and (max-width: 32.0em) {
+      @content
+    }
+  }
+}
+
+*{
+  &, &:before, &:after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+}
+html{
+  font-size: 62.5%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family: sans-serif;
+}
+
+.page-container{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: url("../img/logo.svg") no-repeat fixed center/25vw, rgba(255,255,255,0.8) url("../img/stardust_@2X.png") repeat fixed left;
+}
+
+.page{
+  position: relative;
+  overflow: hidden;
+  &--1{
+    z-index: 10;
+  }
+  &--2{
+    z-index: 20;
+  }
+}
+
+.page-half{
+  width: 50vw;
+  height: 100vh;
+  position: absolute;
+  background-color: white;
+  $startDelay: /* 1.5s */ 0s;
+  $animationDuration: /* 5s */ 0s;
+
+  &--left{
+    background-color: white;
+    animation: slidePageHalfUp $animationDuration ease-in-out $startDelay;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+    &.shadow{
+      box-shadow: 2rem 0rem 4rem rgba(0,0,0,0.15);
+    }
+    @include respond('phone-large'){
+      width: 75vw;
+    }
+    &--image{
+      z-index: 50;
+      @include respond('phone-large'){
+        width: 25vw;
+        & .full-bleed-image{
+          background-position: 60% 50%;
+        }
+
+      }
+    }
+  }
+  &--right{
+    top: 0;
+    right: 0;
+    animation: fadeIn $animationDuration ease-in-out $startDelay;
+    -webkit-animation-fill-mode: backwards;
+    animation-fill-mode: backwards;
+    &.shadow{
+      box-shadow: -2rem 0rem 4rem rgba(0,0,0,0.15);
+    }
+    @include respond('phone-large'){
+      width: 75vw;
+    }
+    &--image{
+      @include respond('phone-large'){
+        width: 25vw;
+      }
+    }
+  }
+}
+@keyframes slidePageHalfUp {
+  0%{
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+  25%{
+    opacity: 1;
+    transform: translateY(-100vh);
+  }
+  50%{
+    transform: translateY(-100vh);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+@keyframes slidePageHalfDown {
+  0%{
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+  25%{
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+  25%, 100%{
+    opacity: 1;
+  }
+}
+.page-content{
+  position: relative;
+  margin: 0 auto;
+
+  &__top {
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    top: 0;
+    left: 0;
+    @include respond('phone-large'){
+      width: 75vw;
+    }
+  }
+
+  &__logo{
+    position: absolute;
+    width: 25rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include respond('phone-large'){
+      width: 18rem;
+    }
+  }
+
+  &__bottom{
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    top: 50vh;
+    @include respond('phone-large'){
+      width: 75vw;
+    }
+    &__inner{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .social-links{
+    &, &:link, &:visited{
+      width: 3rem;
+      height: 3rem;
+      text-decoration: none;
+      box-shadow: 0 .1rem 0 rgba($ctaColor,0);
+      transition: box-shadow .4s ease-out,
+                  opacity .4s ease-out .2s;
+      svg{
+        width: 3rem;
+        height: 3rem;
+        -webkit-filter: grayscale(1) contrast(50);
+      }
+      &:not(:last-child){
+        margin-right: 4rem;
+        @include respond('phone-large'){
+          margin-right: 2rem;
+        }
+        @include respond('phone-small'){
+          svg{
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+    &:hover, &:focus{
+      box-shadow: 0 .8rem 0 rgba($ctaColor,1);
+    }
+  }
+  &__front{
+    transition: all 1s ease-out;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    /* transform: rotateY(180deg); */
+    &--sent{
+      transform: rotateY(180deg);
+    }
+  }
+  &__back{
+    transition: all 1s ease-out;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+    &--sent{
+      transform: rotateY(0deg);
+    }
+  }
+  &__cta{
+    margin-top: 4rem;
+    padding: 1rem 1.2rem;
+    position: relative;
+    a{
+      position: absolute;
+      left: 5rem;
+      @include respond('phone-large'){
+        left: 2.5rem;
+      }
+      @include respond('phone-small'){
+        left: 0rem;
+      }
+      &:link, &:visited{
+        text-decoration: none;
+        color: black;
+        font-size: 1.8rem;
+        font-family: sans-serif;
+        box-shadow: 0 0rem 0rem rgba(0,0,0,0.0);
+        transition: all .8s ease-out;
+        padding: .8rem .9rem;
+      }
+      &:hover, &:focus{
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 4rem rgba(0,0,0,0.2);
+      }
+      &:active{
+        transform: translateY(-.1rem);
+        box-shadow: 0 1rem 8rem rgba(0,0,0,0.1);
+      }
+    }
+  }
+}
+
+.full-bleed-image{
+  position: relative;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.contact-form{
+  width: 100%;
+
+  &__text-input-container{
+    position: relative;
+    margin-bottom: 4rem;
+  }
+
+  &__text-input{
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 100;
+    color: #151515;
+    border: 0px solid lightgray;
+    border-bottom-width: 1px;
+    background-color: transparent;
+    transition: all .4s ease-out;
+    @include respond('phone-small'){
+      width: 100%;
+    }
+    &:focus,&:active{
+      outline: none;
+      transform: translateY(-.2rem);
+      box-shadow: 0rem 1rem 4rem rgba(0,0,0,0.2);
+      border-color: $ctaColor;
+      color: $ctaColor;
+    }
+  }
+  &__text-input-label, &__text-input:placeholder-shown + &__text-input-label{
+    position: absolute;
+    display: block;
+    top: 1.2rem;
+    left: 2.4rem;
+    font-family: sans-serif;
+    color: #151515;
+    font-size: 1.4rem;
+    font-weight: 300;
+    opacity: 0;
+    transition: transform .3s ease-out,
+                opacity  .2s ease-out .1s;
+  }
+  &__text-input:not(:placeholder-shown) + &__text-input-label{
+    opacity: 1;
+    transform: translateY(3.5rem);
+  }
+  &__submit-btn{
+    display: block;
+    position: absolute;
+    left: 2.4rem;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    transition: all .4s ease-out;
+    img{
+      -webkit-filter: grayscale(1) contrast(50);
+    }
+    &:hover, &:focus{
+      outline: none;
+      transform: translateY(-.3rem);
+      box-shadow: 0rem .8rem 0rem 0rem rgba($ctaColor,1);
+    }
+    &:active{
+      outline: none;
+      transform: translateY(-.1rem);
+      box-shadow: 0rem .2rem 0rem 0rem rgba($ctaColor,1);
+    }
+  }
+}
