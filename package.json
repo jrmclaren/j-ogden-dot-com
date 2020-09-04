@@ -23,7 +23,7 @@
   "devDependencies": {
     "autoprefixer": "^8.2.0",
     "live-server": "^1.2.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.13.1",
     "postcss-cli": "^5.0.0"
   },
   "dependencies": {
